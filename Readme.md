@@ -59,4 +59,4 @@ AGL test url is added to Appsetting.json
 
 ## Author
 
-* David Liang 0405312838
+* David Liang
