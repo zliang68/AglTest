@@ -19,15 +19,15 @@ Female
 ## Development Notes
 
 This application is developed using
-* Asp.NET Core 3.1 Web Api
+* Asp.NET Core 3.1 for Web Api service
 * XUnit is used for unit testing
 * Angular 9 for UI in browser
 
 ## Application file structure
 
 Projects in Visual Studio Solution:
-* WebAppCore - Main program to process files
-* TestLibrary - A library defines constants, models and services 
+* WebAppCore - WebApi server application
+* TestLibrary - A library of constants, models and services 
 * UnitTests - Unit tests for this application
 
 Angular project 
