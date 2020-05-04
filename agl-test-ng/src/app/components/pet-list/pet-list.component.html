@@ -1,0 +1,15 @@
+<p> List of cat's name under owner's gender </p>
+<div>
+    <div *ngFor="let item of pets">
+        {{ item.ownerGender }}
+        <ul>
+            <li *ngFor="let petname of item.catNames">
+                {{ petname }}
+            </li>
+        </ul>
+    </div>
+</div>
+<div *ngIf="!!errorMesssage">
+    <hr />
+    <h4> {{ errorMesssage }} </h4>
+</div>
