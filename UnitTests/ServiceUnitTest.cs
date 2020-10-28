@@ -28,19 +28,49 @@ namespace UnitTests
         [Fact]
         public void GivenPetOwnersData_WhenFiltered_ShouldReturnCatsByOwnerGender()
         {
+            // Arrange
             var data = GetPetOwners();
+            data.First().Pets = new List<Pet> 
+            { 
+                new Pet { Name = "Bob", Type = "Cat" },
+                new Pet { Name = "Nemo", Type = "Fish" }
+            };
+            data.Last().Pets = new List<Pet> 
+            { 
+                new Pet { Name = "Mary", Type = "Cat" },
+                new Pet { Name = "Fido", Type = "Dog" }
+            };
+
+            // Act
             var result = _peopleService.GetCatsByOwnerGender(data);
+
+            // Assert
             Assert.True(result.Any());
-
-            data.Last().Pets = new List<Pet> { new Pet { Name = "Mary", Type = "Cat" } };
-            result = _peopleService.GetCatsByOwnerGender(data);
-            Assert.True(result.First(x => x.OwnerGender == Constants.Female).CatNames.Any());
-
-            data.First().Pets = new List<Pet> { new Pet { Name = "Bob", Type = "Cat" } };
-            result = _peopleService.GetCatsByOwnerGender(data);
             Assert.True(result.First(x => x.OwnerGender == Constants.Male).CatNames.Any());
+            Assert.True(result.First(x => x.OwnerGender == Constants.Female).CatNames.Any());
         }
 
+        /// <summary>
+        /// Test PeopleService.GetCatsByOwnerGender method with no pet people data
+        /// </summary>
+        [Fact]
+        public void GivenNoPetPeople_WhenFiltered_ShouldReturnEmptyCatNameList()
+        {
+            // Arrange
+            var data = GetPetOwners();
+
+            // Act
+            var result = _peopleService.GetCatsByOwnerGender(data);
+
+            // Assert
+            Assert.True(result.Any());
+            
+            Assert.True(result.First().OwnerGender.ToLower() == Constants.Male.ToLower());
+            Assert.False(result.First().CatNames.Any());
+
+            Assert.True(result.Last().OwnerGender.ToLower() == Constants.Female.ToLower());
+            Assert.False(result.Last().CatNames.Any());
+        }
 
         /// <summary>
         /// Helper to generate test data
@@ -62,7 +92,5 @@ namespace UnitTests
                 new PetOwner { Gender = Constants.Female }
             };
         }
-
-        
     }
 }

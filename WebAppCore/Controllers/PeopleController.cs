@@ -39,7 +39,8 @@ namespace WebAppCore.Controllers
             try
             {
                 var data = await _peopleService.GetPetOwners(_configuration[Constants.PeopleServiceUrl]);
-                return Ok(_peopleService.GetCatsByOwnerGender(data));
+                var result = _peopleService.GetCatsByOwnerGender(data);
+                return Ok(result);
             }
             catch (Exception ex)
             {

@@ -27,6 +27,8 @@ namespace TestLibrary.Services
         /// <returns></returns>
         public async Task<IList<PetOwner>> GetPetOwners(string url)
         {
+            _logger.LogInformation($"Start getting data from {url}");
+
             try
             {
                 var httpClient = new HttpClient();
@@ -36,7 +38,7 @@ namespace TestLibrary.Services
 
                 var result = await httpResponse.Content.ReadAsAsync<IList<PetOwner>>();
 
-                _logger.LogInformation($"Get data from {url}");
+                _logger.LogInformation($"Finished getting data from {url}");
                 return result;
             }
             catch (Exception ex)
